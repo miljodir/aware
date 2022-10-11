@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - master
+    paths:
+      - api/**
+      - "!*.md"
   pull_request:
     branches:
       - master
