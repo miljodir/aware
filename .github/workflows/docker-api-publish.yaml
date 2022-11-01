@@ -21,6 +21,7 @@ env:
   IMAGE_SUFFIX: "/api" # change to suit your image name
   BUILD_CONTEXT: "./api" # change me to fit your image path
   DOCKERFILE_PATH: "default" # change me if needed
+  ARTIFACT: dummy
 
 jobs:
   build:
@@ -94,17 +95,59 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          outputs: type=docker,dest=/tmp/api.tar
 
-      - name: Container image scan
-        if: github.event_name == 'pull_request'
-        env:
-          # See https://github.com/Azure/container-scan/issues/146
-          DOCKLE_HOST: "unix:///var/run/docker.sock"
-        id: scan
-        uses: Azure/container-scan@v0.1
+      #- run: docker load -i /tmp/api.tar
+
+      # - name: Container image scan
+      #   if: github.event_name == 'pull_request'
+      #   env:
+      #     # See https://github.com/Azure/container-scan/issues/146
+      #     DOCKLE_HOST: "unix:///var/run/docker.sock"
+      #   id: scan
+      #   uses: Azure/container-scan@v0.1
+      #   with:
+      #     image-name: ${{ env.REGISTRY }}/${{ env.REPO_NAME }}${{ env.IMAGE_SUFFIX }}:${{ steps.env.outputs.tag }}
+      #     severity-threshold: "CRITICAL"
+
+      - name: Run hadolint
+
+        uses: hadolint/hadolint-action@v2.1.0
         with:
-          image-name: ${{ env.REGISTRY }}/${{ env.REPO_NAME }}${{ env.IMAGE_SUFFIX }}:${{ steps.env.outputs.tag }}
-          severity-threshold: "CRITICAL"
+          dockerfile: ${{ steps.env.outputs.DOCKERFILE_PATH }}
+          format: sarif
+          output-file: hadolint-results.sarif
+          no-fail: true
+
+      - name: Upload analysis results to GitHub
+
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: hadolint-results.sarif
+          wait-for-processing: true
+
+      - uses: actions/setup-dotnet@v3
+
+        with:
+          dotnet-version: |
+            6.0.x
+
+      # Run Dockerfile and Docker image analyzers
+      - name: Run Microsoft Security DevOps Analysis
+
+        uses: microsoft/security-devops-action@preview
+        env:
+          #terrascan_SkipRules: ""
+          GDN_TRIVY_ACTION: "image"
+          GDN_TRIVY_IMAGEPATH: /tmp/api.tar
+        id: msdo
+
+      # Upload alerts to the Security tab
+      - name: Upload alerts to Security tab
+
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ${{ steps.msdo.outputs.sarifFile }}
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
