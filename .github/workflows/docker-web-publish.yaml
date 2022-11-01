@@ -21,7 +21,7 @@ env:
   IMAGE_SUFFIX: "/web" # change to suit your image name
   BUILD_CONTEXT: "./web" # change me to fit your image path
   DOCKERFILE_PATH: "default" # change me if needed
-  ARITFACT: dummyweb
+  ARTIFACT: dummyweb
 
 jobs:
   build:

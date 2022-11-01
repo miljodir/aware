@@ -21,7 +21,7 @@ env:
   IMAGE_SUFFIX: "/api" # change to suit your image name
   BUILD_CONTEXT: "./api" # change me to fit your image path
   DOCKERFILE_PATH: "default" # change me if needed
-  ARITFACT: dummy
+  ARTIFACT: dummy
 
 jobs:
   build:
