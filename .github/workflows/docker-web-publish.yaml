@@ -95,9 +95,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          outputs: type=docker,dest=/tmp/${{ env.artifact }}.tar
+          outputs: type=docker,dest=/tmp/${{ env.ARTIFACT }}.tar
 
-      #- run: docker load -i /tmp/${{ env.artifact }}.tar
+      #- run: docker load -i /tmp/${{ env.ARTIFACT }}.tar
 
       # - name: Container image scan
       #   if: github.event_name == 'pull_request'
@@ -124,7 +124,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: hadolint-results.sarif
-          wait-for-processing: true
 
       - uses: actions/setup-dotnet@v3
         if: github.event_name == 'pull_request'
@@ -139,7 +138,7 @@ jobs:
         env:
           #terrascan_SkipRules: ""
           GDN_TRIVY_ACTION: "image"
-          GDN_TRIVY_IMAGEPATH: /tmp/${{ env.artifact }}.tar
+          GDN_TRIVY_IMAGEPATH: /tmp/${{ env.ARTIFACT }}.tar
         id: msdo
 
       # Upload alerts to the Security tab
