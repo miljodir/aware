@@ -21,6 +21,7 @@ env:
   IMAGE_SUFFIX: "/web" # change to suit your image name
   BUILD_CONTEXT: "./web" # change me to fit your image path
   DOCKERFILE_PATH: "default" # change me if needed
+  ARITFACT: dummyweb
 
 jobs:
   build:
@@ -94,9 +95,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          outputs: type=docker,dest=/tmp/${{ inputs.artifact }}.tar
+          outputs: type=docker,dest=/tmp/${{ env.artifact }}.tar
 
-      #- run: docker load -i /tmp/${{ inputs.artifact }}.tar
+      #- run: docker load -i /tmp/${{ env.artifact }}.tar
 
       # - name: Container image scan
       #   if: github.event_name == 'pull_request'
@@ -138,7 +139,7 @@ jobs:
         env:
           #terrascan_SkipRules: ""
           GDN_TRIVY_ACTION: "image"
-          GDN_TRIVY_IMAGEPATH: /tmp/${{ inputs.artifact }}.tar
+          GDN_TRIVY_IMAGEPATH: /tmp/${{ env.artifact }}.tar
         id: msdo
 
       # Upload alerts to the Security tab
