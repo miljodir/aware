@@ -1,8 +1,8 @@
 import requests
-
 from config import Config
 from loggers.loki import get_container_logs
-from utils import dead_mans_switch, get_path, local_to_epoch_time, truncate_string
+from utils import (dead_mans_switch, get_path, local_to_epoch_time,
+                   truncate_string)
 
 ignore_alert_list = Config.ignore_alert_list
 
@@ -32,7 +32,7 @@ def get_prometheus_events():
             'severity': get_path(event, 'labels', 'severity'),
             'message': truncate_string(message),
             'triggered': local_to_epoch_time(event['activeAt']),
-            "source": "Prometheus",
+            "cluster": annotation.get("cluster"),
             "logs": logs
         })
 

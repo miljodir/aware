@@ -33,9 +33,9 @@ function EventRow({event}) {
             onClick={() => setLogsVisible(!logsVisible)}
             style={{ cursor: "pointer", background: BG}}
         >
+        <td data-label="Cluster">{event.clustername}</td>
         <td data-label="Alertname">{event.alertname}</td>
         <td data-label="Namespace">{event.namespace}</td>
-        <td data-label="Source">{event.source}</td>
         <td data-label="Message">{event.message}</td>
         <td data-label="Triggered">{event.triggered}</td>
         </tr>
@@ -67,7 +67,7 @@ function EventContainer({ events }) {
             <tr id="eventContainer">
               <th>Alertname</th>
               <th>Namespace/Host</th>
-              <th>Source</th>
+              <th>Cluster</th>
               <th className="message">Message</th>
               <th >Triggered</th>
             </tr>
