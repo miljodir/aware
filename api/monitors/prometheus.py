@@ -23,7 +23,7 @@ def get_prometheus_events():
     events = []
     for event in filtered:
         annotation = event.get("annotations")
-        message = annotation.get("message") if "message" in annotation else annotation.get("description")
+        message = annotation.get("description") if "description" in annotation else annotation.get("summary")
         pod = event["labels"].get("pod")
         logs = get_container_logs(pod)if pod and Config.loki_api else ["No logs..."]
         events.append({
