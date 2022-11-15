@@ -32,7 +32,7 @@ def get_prometheus_events():
             'severity': get_path(event, 'labels', 'severity'),
             'message': truncate_string(message),
             'triggered': local_to_epoch_time(event['activeAt']),
-            "cluster": annotation.get("cluster"),
+            "cluster": get_path(event, 'labels', 'cluster'),
             "logs": logs
         })
 
