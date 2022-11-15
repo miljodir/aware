@@ -95,7 +95,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          outputs: type=docker,dest=/tmp/api.tar
+          #outputs: type=docker,dest=/tmp/api.tar
 
       #- run: docker load -i /tmp/api.tar
 
