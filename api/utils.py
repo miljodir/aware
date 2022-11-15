@@ -1,6 +1,6 @@
 import time
 from datetime import datetime
-from typing import List, Dict
+from typing import Dict, List
 
 
 def get_path(event, first_key, *keys):
@@ -22,7 +22,7 @@ def dead_mans_switch(name, url, error) -> List[Dict]:
         'severity': "critical",
         'message': f"Failed to fetch data from {url}. {error}",
         'triggered': time.time(),
-        "source": "Aware-API"
+        "cluster": "contoso"
     }]
 
 
