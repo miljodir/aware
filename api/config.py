@@ -164,7 +164,8 @@ class Config:
           "job": "kubelet",
           "namespace": "kube-system",
           "service": "prometheus-operator-kubelet",
-          "severity": "warning"
+          "severity": "warning",
+          "cluster": "d-aks"
         },
         "annotations": {
           "message": "50% of the kubelet/prometheus-operator-kubelet targets in kube-system namespace are down."
@@ -178,7 +179,8 @@ class Config:
           "job": "gitlabstats",
           "namespace": "monitoring",
           "service": "gitlabstats",
-          "severity": "warning"
+          "severity": "warning",
+          "cluster": "d-aks"
         },
         "annotations": {
           "message": "100% of the gitlabstats/gitlabstats targets in monitoring namespace are down."
@@ -192,7 +194,8 @@ class Config:
           "job": "kube-dns",
           "namespace": "kube-system",
           "service": "prometheus-operator-kube-p-kube-dns",
-          "severity": "warning"
+          "severity": "warning",
+          "cluster": "d-aks"
         },
         "annotations": {
           "message": "100% of the kube-dns/prometheus-operator-kube-p-kube-dns targets in kube-system namespace are down."
@@ -214,7 +217,8 @@ class Config:
       }, {
         "labels": {
           "alertname": "KubeControllerManagerDown",
-          "severity": "critical"
+          "severity": "warning",
+          "cluster": "t-aks"
         },
         "annotations": {
           "description": "KubeControllerManager has disappeared from Prometheus target discovery.",
@@ -227,7 +231,8 @@ class Config:
       }, {
         "labels": {
           "alertname": "KubeCPUOvercommit",
-          "severity": "warning"
+          "severity": "warning",
+          "cluster": "d-aks"
         },
         "annotations": {
           "description": "Cluster has overcommitted CPU resource requests for Pods and cannot tolerate node failure.",
@@ -248,7 +253,8 @@ class Config:
           "namespace": "ms-continuus",
           "pod": "prometheus-operator-kube-state-metrics-69fcc8d48c-d6r4j",
           "service": "prometheus-operator-kube-state-metrics",
-          "severity": "warning"
+          "severity": "warning",
+          "cluster": "d-aks"
         },
         "annotations": {
           "description": "Job ms-continuus/ms-continuus-1610831700 is taking more than 12 hours to complete.",
@@ -270,7 +276,8 @@ class Config:
           "namespace": "ms-continuus",
           "pod": "prometheus-operator-kube-state-metrics-69fcc8d48c-d6r4j",
           "service": "prometheus-operator-kube-state-metrics",
-          "severity": "warning"
+          "severity": "warning",
+          "cluster": "d-aks"
         },
         "annotations": {
           "description": "Job ms-continuus/ms-continuus-1610831700 failed to complete.",
@@ -283,6 +290,7 @@ class Config:
       }, {
         "labels": {
           "alertname": "PrometheusRuleFailures",
+          "cluster": "d-aks",
           "container": "prometheus",
           "endpoint": "web",
           "instance": "10.0.1.101:9090",
@@ -291,7 +299,8 @@ class Config:
           "pod": "prometheus-prometheus-operator-kube-p-prometheus-0",
           "rule_group": "/etc/prometheus/rules/prometheus-prometheus-operator-kube-p-prometheus-rulefiles-0/monitoring-prometheus-operator-kube-p-kubelet.rules.yaml;kubelet.rules",
           "service": "prometheus-operator-kube-p-prometheus",
-          "severity": "critical"
+          "severity": "warning",
+          "cluster": "t-aks"
         },
         "annotations": {
           "description": "Prometheus monitoring/prometheus-prometheus-operator-kube-p-prometheus-0 has failed to evaluate 30 rules in the last 5m.",
@@ -303,6 +312,7 @@ class Config:
       }, {
         "labels": {
           "alertname": "PrometheusRuleFailures",
+          "cluster": "d-aks",
           "container": "prometheus",
           "endpoint": "web",
           "instance": "10.0.1.101:9090",
@@ -311,7 +321,8 @@ class Config:
           "pod": "prometheus-prometheus-operator-kube-p-prometheus-0",
           "rule_group": "/etc/prometheus/rules/prometheus-prometheus-operator-kube-p-prometheus-rulefiles-0/monitoring-prometheus-operator-kube-p-kubernetes-system-kubelet.yaml;kubernetes-system-kubelet",
           "service": "prometheus-operator-kube-p-prometheus",
-          "severity": "critical"
+          "severity": "warning",
+          "cluster": "t-aks"
         },
         "annotations": {
           "description": "Prometheus monitoring/prometheus-prometheus-operator-kube-p-prometheus-0 has failed to evaluate 10 rules in the last 5m.",
