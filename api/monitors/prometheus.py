@@ -26,6 +26,11 @@ def get_prometheus_events():
     for event in filtered:
         annotation = event.get("annotations")
         message = annotation.get("description") if "description" in annotation else annotation.get("summary")
+
+        cluster = get_path(event, 'labels', 'cluster') 
+        if cluster is None:
+            cluster = "default"
+
         pod = event["labels"].get("pod")
         logs = get_container_logs(pod)if pod and Config.loki_api else ["No logs..."]
         events.append({
@@ -34,7 +39,7 @@ def get_prometheus_events():
             'severity': get_path(event, 'labels', 'severity'),
             'message': truncate_string(message),
             'triggered': local_to_epoch_time(event['activeAt']),
-            "cluster": get_path(event, 'labels', 'cluster') or 'default',
+            "cluster": cluster,
             "logs": logs
         })
 
