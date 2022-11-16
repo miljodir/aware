@@ -1,4 +1,4 @@
-import json
+#import json
 
 import requests
 from config import Config
@@ -13,8 +13,8 @@ def get_prometheus_events():
     try:
         request = requests.get(url=Config.prometheus_api)
         request.raise_for_status()
-        #data = request.json()
-        data = json.loads(Config.prom_test_data)
+        data = request.json()
+        #data = json.loads(Config.prom_test_data)
     except Exception as e:
         print(f'Fatal: Could not GET prometheus API {Config.prometheus_api}. Error: {e}')
         return dead_mans_switch("Prometheus events", Config.prometheus_api, e)
