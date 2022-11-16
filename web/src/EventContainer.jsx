@@ -33,9 +33,9 @@ function EventRow({event}) {
             onClick={() => setLogsVisible(!logsVisible)}
             style={{ cursor: "pointer", background: BG}}
         >
-        <td data-label="Cluster">{event.cluster}</td>
+        <td className='bold' data-label="Cluster">{event.cluster}</td>
         <td data-label="Alertname">{event.alertname}</td>
-        <td data-label="Namespace">{event.namespace}</td>
+        <td className='bold' data-label="Namespace">{event.namespace}</td>
         <td data-label="Message">{event.message}</td>
         <td data-label="Triggered">{event.triggered}</td>
         </tr>
@@ -65,11 +65,11 @@ function EventContainer({ events }) {
         <table>
           <thead>
             <tr id="eventContainer">
-              <th>Cluster</th>
+              <th className="cluster">Cluster</th>
               <th>Alertname</th>
-              <th>Namespace/Host</th>
-              <th className="message">Message</th>
-              <th >Triggered</th>
+              <th className='ns'>Namespace</th>
+              <th className='message'>Message</th>
+              <th className="triggered">Triggered</th>
             </tr>
           </thead>
           <tbody>

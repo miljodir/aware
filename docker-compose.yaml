@@ -13,7 +13,7 @@ services:
       - web
     build: api
     container_name: aware
-    image: sdpequinor/aware-api:latest
+    image: ghcr.io/miljodir/aware/api:latest
     volumes:
       - ./api:/src
     environment:
@@ -30,7 +30,7 @@ services:
 
   web:
     restart: unless-stopped
-    image: sdpequinor/aware-web:latest
+    image: ghcr.io/miljodir/aware/web:latest
     build: web
     command: "yarn start"
     stdin_open: true
