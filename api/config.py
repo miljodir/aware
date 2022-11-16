@@ -206,7 +206,8 @@ class Config:
       }, {
         "labels": {
           "alertname": "Watchdog",
-          "severity": "none"
+          "severity": "none",
+          "cluster": "t-aks"
         },
         "annotations": {
           "message": "This is an alert meant to ensure that the entire alerting pipeline is functional.This alert is always firing, therefore it should always be firing in Alertmanagerand always fire against a receiver. There are integrations with various notificationmechanisms that send a notification when this alert is not firing. For example the 'DeadMansSnitch' integration in PagerDuty."
@@ -232,7 +233,7 @@ class Config:
         "labels": {
           "alertname": "KubeCPUOvercommit",
           "severity": "warning",
-          "cluster": "d-aks"
+          "cluster": "r-aks"
         },
         "annotations": {
           "description": "Cluster has overcommitted CPU resource requests for Pods and cannot tolerate node failure.",
@@ -254,7 +255,7 @@ class Config:
           "pod": "prometheus-operator-kube-state-metrics-69fcc8d48c-d6r4j",
           "service": "prometheus-operator-kube-state-metrics",
           "severity": "warning",
-          "cluster": "d-aks"
+          "cluster": "p-aks"
         },
         "annotations": {
           "description": "Job ms-continuus/ms-continuus-1610831700 is taking more than 12 hours to complete.",

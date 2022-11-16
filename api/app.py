@@ -2,7 +2,7 @@ import json
 import time
 from typing import Dict, List
 
-from flask import abort, Flask, jsonify, request
+from flask import Flask, abort, jsonify, request
 
 from config import Config
 from monitors.external import get_exported_events
@@ -32,7 +32,11 @@ def get_raw_events() -> List[Dict]:
 def events():
     events = get_raw_events()
 
-    sorted_events = sorted(events, key=lambda event: event['triggered'], reverse=True)
+    #sorted_events = sorted(events, key=lambda event: (event['cluster'], event['triggered']), reverse=True)
+
+    # order clusters so that prod comes on top and dev on bottom
+    clusterAlphabet = "dtrp"
+    sorted_events = sorted(events, key=lambda event: ([clusterAlphabet.index(c) for c in event['cluster'][0]], event['triggered']), reverse=True)
 
     for e in sorted_events:
         if e["triggered"] == 0:

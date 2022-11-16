@@ -37,7 +37,7 @@ function EventRow({event}) {
         <td data-label="Alertname">{event.alertname}</td>
         <td className='bold' data-label="Namespace">{event.namespace}</td>
         <td data-label="Message">{event.message}</td>
-        <td data-label="Triggered">{event.triggered}</td>
+        <td className='bold' data-label="Triggered">{event.triggered}</td>
         </tr>
         {logsVisible ? <tr style={{background: BG, borderTop: 'none'}}>
           {logsVisible &&
