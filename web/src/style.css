@@ -1,7 +1,7 @@
 .Header {
   margin: 0;
   padding: 20px;
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
   text-align: center;
 }
@@ -18,11 +18,7 @@ p {
 }
 
 .message {
-  width: 40%;
-}
-
-.cluster {
-  width: 5%;
+  width: 50%;
 }
 
 table {
@@ -44,10 +40,15 @@ tr {
 td {
   display: table-cell;
   word-wrap: break-word;
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 5px;
   border: 1px solid black;
   text-align: left;
+}
+
+td.bold
+{
+  font-weight: bold;
 }
 
 th {
@@ -55,6 +56,19 @@ th {
   padding: 15px;
   color: white;
   background: black;
+  font-size: 1.5em;
+}
+
+th.cluster {
+  width: 5%;
+}
+
+th.ns {
+  width: 8%;
+}
+
+th.triggered {
+  width: 8%;
 }
 
 .logRow {
