@@ -21,6 +21,10 @@ p {
   width: 40%;
 }
 
+.cluster {
+  width: 5%;
+}
+
 table {
   border: 0;
   border-collapse: collapse;

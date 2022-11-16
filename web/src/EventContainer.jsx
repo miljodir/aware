@@ -65,7 +65,7 @@ function EventContainer({ events }) {
         <table>
           <thead>
             <tr id="eventContainer">
-              <th>Cluster</th>
+              <th className="cluster">Cluster</th>
               <th>Alertname</th>
               <th>Namespace/Host</th>
               <th className="message">Message</th>
