@@ -29,10 +29,10 @@ def get_prometheus_events():
 
         cluster = get_path(event, 'labels', 'cluster') 
         if cluster is None:
-            cluster = "default"
+            cluster = ""
 
         pod = event["labels"].get("pod")
-        logs = get_container_logs(pod)if pod and Config.loki_api else ["No logs..."]
+        logs = get_container_logs(pod, cluster)if pod and Config.loki_api else ["No logs..."]
         events.append({
             'alertname': get_path(event, 'labels', 'alertname'),
             'namespace': get_path(event, 'labels', 'namespace'),

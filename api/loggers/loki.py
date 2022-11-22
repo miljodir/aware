@@ -11,9 +11,9 @@ def strip_ansi_escape(text: str) -> str:
     return new_text
 
 
-def get_container_logs(instance: str) -> [str]:
+def get_container_logs(instance: str, cluster: str) -> [str]:
     parameters = {
-        "query": f"{{pod=\"{instance}\"}}",
+        "query": f"{{cluster=~\"{cluster}\",pod=\"{instance}\"}}",
         "limit": 20,
         "direction": "backward"
     }
