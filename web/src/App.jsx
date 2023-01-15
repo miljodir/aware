@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import EventContainer from './EventContainer';
 import axios from 'axios';
-import "./style.css"
+import React, { useEffect, useState } from 'react';
+import EventContainer from './EventContainer';
+import "./style.css";
 
 function getMostSevereAlert(events) {
   if (events.some((event) => event.severity === 'critical')) {
@@ -76,9 +76,10 @@ export default () => {
   useEffect(() => {
     document.title = 'Aware monitoring';
     refetchData();
-    setInterval(setInterval(() => refetchData(), 30000));
-    return () => clearInterval(interval);
-  },[])
+    const intervalId = window.setInterval(() => refetchData(), 30000);
+    return () => clearInterval(intervalId);
+  },[refetchData])
+
 
   if (loading) {
     return <div>Loading...</div>;
