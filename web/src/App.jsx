@@ -78,7 +78,7 @@ export default () => {
     refetchData();
     setInterval(setInterval(refetchData, 30000)); // using setInterval to update the state variable
     return () => clearInterval(interval);
-  },[]);
+  }, [interval]);
 
 
 
