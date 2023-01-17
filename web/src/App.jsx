@@ -76,7 +76,8 @@ export default () => {
   useEffect(() => {
     document.title = 'Aware monitoring';
     refetchData();
-    setInterval(setInterval(refetchData, 30000)); // using setInterval to update the state variable
+    const intervalId = setInterval(refetchData, 30000);
+    setInterval(intervalId);
     return () => clearInterval(interval);
   }, [interval]);
 
