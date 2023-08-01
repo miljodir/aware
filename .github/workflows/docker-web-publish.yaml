@@ -150,13 +150,13 @@ jobs:
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
-      - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@v3.1.1
+      # - name: Install cosign
+      #   if: github.event_name != 'pull_request'
+      #   uses: sigstore/cosign-installer@v3.1.1
 
-      - name: Sign the images with GitHub OIDC Token
-        if: ${{ github.event_name != 'pull_request' }}
-        env:
-          DIGEST: ${{ steps.build-and-push.outputs.digest }}
-          TAGS: ${{ steps.meta.outputs.tags }}
-        run: cosign sign --yes "${TAGS}@${DIGEST}"
+      # - name: Sign the images with GitHub OIDC Token
+      #   if: ${{ github.event_name != 'pull_request' }}
+      #   env:
+      #     DIGEST: ${{ steps.build-and-push.outputs.digest }}
+      #     TAGS: ${{ steps.meta.outputs.tags }}
+      #   run: cosign sign --yes "${TAGS}@${DIGEST}"
