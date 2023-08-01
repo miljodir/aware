@@ -56,7 +56,6 @@ export default () => {
   const [events, setEvents] = useState([]);
   const [backgroundColor, setBackgroundColor] = useState('white');
   const [lastSuccessfulFetch, setLastSuccessfulFetch] = useState(null);
-  const [interval, setInterval] = useState(null);
 
   function refetchData() {
     axios
@@ -77,11 +76,8 @@ export default () => {
     document.title = 'Aware monitoring';
     refetchData();
     const intervalId = setInterval(refetchData, 30000);
-    setInterval(intervalId);
-    return () => clearInterval(interval);
-  }, [interval]);
-
-
+    return () => clearInterval(intervalId);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
