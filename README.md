@@ -70,4 +70,4 @@ Refetches all alerts every 30 seconds.
 
 Test secret push protection custom patterns with fake conn string:
 
-connectionString value="data source=127.0.0.1;initial catalog=db;integrated security=false;persist security info=True;User ID=fake;"
+connectionString value="data source=127.0.0.1;initial catalog=db;integrated security=false;persist security info=True;User ID=fake;Password=fake;"
