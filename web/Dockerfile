@@ -2,17 +2,19 @@ FROM node:lts-alpine AS nodebuilder
 WORKDIR /code
 
 COPY --link package.json yarn.lock /code/
-RUN yarn install --frozen-lockfile
+RUN yarn config set strict-ssl false && yarn install --frozen-lockfile
 COPY --link public /code/public
 COPY --link src /code/src
 RUN yarn build
 
-FROM node:lts-alpine AS final
+FROM nginxinc/nginx-unprivileged:stable-alpine-otel AS final
 
-RUN npm install -g serve
-WORKDIR /code
-COPY --link --from=nodebuilder /code/build /code/build
+# Copy nginx configuration
+COPY --link nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 3000
+# Copy built static files to nginx html directory
+COPY --link --from=nodebuilder /code/build /usr/share/nginx/html
 
-CMD ["serve", "-s", "build"]
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]
