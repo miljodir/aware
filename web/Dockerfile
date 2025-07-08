@@ -10,8 +10,8 @@ RUN yarn build
 FROM node:lts-alpine AS final
 
 RUN npm install -g serve
+WORKDIR /code
 COPY --link --from=nodebuilder /code/build /code/build
-COPY --link /nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 3000
 
