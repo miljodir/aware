@@ -3,6 +3,7 @@ name = "Aware-API"
 version = "0.1.0"
 description = "Flask-API for Aware, the highly visual alerting dashboard"
 authors = ["Stig Ofstad <stigofstad@gmail.com>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.8"
