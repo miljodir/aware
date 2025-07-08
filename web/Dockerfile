@@ -3,7 +3,7 @@ RUN npm install -g serve
 WORKDIR /code
 
 COPY package.json yarn.lock /code/
-RUN yarn install --frozen-lockfile
+RUN yarn install
 COPY public /code/public
 COPY src /code/src
 
