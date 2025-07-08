@@ -50,7 +50,7 @@ function CouldNotFetch({ lastSuccessfulFetch }) {
   );
 }
 
-export default () => {
+const App = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);
@@ -92,3 +92,5 @@ export default () => {
     );
   }
 };
+
+export default App;
