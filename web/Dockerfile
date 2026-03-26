@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:lts-alpine
 WORKDIR /code
 
 COPY package*.json /code/
