@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import EventContainer from './EventContainer';
-import "./style.css";
+import './style.css';
 
 function getMostSevereAlert(events) {
   if (events.some((event) => event.severity === 'critical')) {
@@ -50,45 +50,55 @@ function CouldNotFetch({ lastSuccessfulFetch }) {
   );
 }
 
-export default () => {
+export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);
   const [backgroundColor, setBackgroundColor] = useState('white');
   const [lastSuccessfulFetch, setLastSuccessfulFetch] = useState(null);
 
-  function refetchData() {
-    axios
-      .get(`/api/events`)
-      .then((response) => {
-        setLoading(false);
-        setEvents(response.data);
-        setBackgroundColor(getBackgroundColor(response.data));
-        setLastSuccessfulFetch(new Date());
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error);
-      });
-  }
-
   useEffect(() => {
     document.title = 'Aware monitoring';
+  }, []);
+
+  useEffect(() => {
+    document.body.style.backgroundColor = backgroundColor;
+    return () => {
+      document.body.style.backgroundColor = 'white';
+    };
+  }, [backgroundColor]);
+
+  useEffect(() => {
+    function refetchData() {
+      axios
+        .get('/api/events')
+        .then((response) => {
+          setLoading(false);
+          setError(null);
+          setEvents(response.data);
+          setBackgroundColor(getBackgroundColor(response.data));
+          setLastSuccessfulFetch(new Date());
+        })
+        .catch((fetchError) => {
+          setLoading(false);
+          setError(fetchError);
+        });
+    }
+
     refetchData();
-    const intervalId = setInterval(refetchData, 30000);
-    return () => clearInterval(intervalId);
+    const intervalId = window.setInterval(refetchData, 30000);
+    return () => window.clearInterval(intervalId);
   }, []);
 
   if (loading) {
     return <div>Loading...</div>;
-  } else {
-    document.body.style.backgroundColor = backgroundColor
-    return (
-      <div backgroundColor={backgroundColor}>
-        <div className="Header">{window.location.host}</div>
-        {error && <CouldNotFetch lastSuccessfulFetch={lastSuccessfulFetch} />}
-        <EventContainer events={events} />
-      </div>
-    );
   }
-};
+
+  return (
+    <div>
+      <div className="Header">{window.location.host}</div>
+      {error && <CouldNotFetch lastSuccessfulFetch={lastSuccessfulFetch} />}
+      <EventContainer events={events} />
+    </div>
+  );
+}
