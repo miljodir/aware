@@ -6,17 +6,21 @@
     "axios": "1.13.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-scripts": "5.0.1",
     "styled-components": "6.3.12"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^15.0.7",
+    "@vitejs/plugin-react": "^6.0.1",
+    "jsdom": "^24.1.1",
+    "vite": "^8.0.3",
+    "vitest": "^4.1.1"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "scripts": {
+    "start": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 3000",
+    "test": "vitest run"
   },
   "browserslist": [
     ">0.2%",

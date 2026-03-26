@@ -1,13 +1,16 @@
-FROM node:lts-alpine AS nodebuilder
-RUN npm install -g serve
+FROM node:lts-alpine
 WORKDIR /code
 
-COPY package.json yarn.lock /code/
-RUN yarn install
+COPY package*.json /code/
+RUN npm install --no-fund --no-audit
+RUN npm install -g serve@14.2.4 --no-fund --no-audit
+
+COPY index.html /code/
 COPY public /code/public
 COPY src /code/src
+COPY vite.config.mjs vitest.setup.js /code/
 
-RUN yarn build
+RUN npm run build
 EXPOSE 3000
 
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "dist", "-l", "3000"]

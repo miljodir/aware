@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
     image: ghcr.io/miljodir/aware/web:latest
     build: web
-    command: "yarn start"
+    command: "npm start"
     stdin_open: true
     volumes:
       - ./web/src/:/code/src
