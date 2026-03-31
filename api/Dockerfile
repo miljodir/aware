@@ -1,4 +1,4 @@
-FROM python:slim
+FROM python:3.14-alpine-slim
 ENV PYTHONUNBUFFERED=1
 WORKDIR /src
 
