@@ -1,6 +1,9 @@
 name: Push web to GHCR
 
 on:
+  merge_group:
+    branches:
+      - master
   workflow_dispatch:
   push:
     branches:

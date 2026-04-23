@@ -1,6 +1,7 @@
 name: Push API to GHCR
 
 on:
+  merge_group:
   workflow_dispatch:
   push:
     branches:
